@@ -7,11 +7,11 @@ import {
 	toInteger
 } from '../functions'
 import type {
-	PointInfo,
 	PathFindingFunction,
+	PointInfo,
 	SVGDrawFunction
 } from '../functions'
-import type { Node, EdgeProps } from 'reactflow'
+import type { EdgeProps, Node } from '@xyflow/react'
 
 export type EdgeParams = Pick<
 	EdgeProps,
@@ -30,7 +30,9 @@ export type GetSmartEdgeOptions = {
 	generatePath?: PathFindingFunction
 }
 
-export type GetSmartEdgeParams<NodeDataType = unknown> = EdgeParams & {
+export type GetSmartEdgeParams<
+	NodeDataType extends Record<string, unknown> = Record<string, unknown>
+> = EdgeParams & {
 	options?: GetSmartEdgeOptions
 	nodes: Node<NodeDataType>[]
 }
@@ -41,7 +43,9 @@ export type GetSmartEdgeReturn = {
 	edgeCenterY: number
 }
 
-export const getSmartEdge = <NodeDataType = unknown>({
+export const getSmartEdge = <
+	NodeDataType extends Record<string, unknown> = Record<string, unknown>
+>({
 	options = {},
 	nodes = [],
 	sourceX,

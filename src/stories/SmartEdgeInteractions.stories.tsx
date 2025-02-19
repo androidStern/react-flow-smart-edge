@@ -3,10 +3,10 @@ import React from 'react'
 import { GraphWrapper } from './GraphWrapper'
 import { SimulateDragAndDrop, wait } from './SimulateDragAndDrop'
 import { SmartBezier, SmartStraight, SmartStep } from './SmartEdge.stories'
-import type { Meta, Story } from '@storybook/react'
-import type { ReactFlowProps } from 'reactflow'
+import type { Meta, StoryFn, StoryObj } from '@storybook/react'
+import type { ReactFlowProps } from '@xyflow/react'
 
-export default {
+const meta = {
 	title: 'Interactions',
 	component: GraphWrapper,
 	argTypes: {
@@ -14,13 +14,15 @@ export default {
 		defaultNodes: { table: { disable: true } },
 		defaultEdges: { table: { disable: true } }
 	}
-} as Meta
+} satisfies Meta<typeof GraphWrapper>
 
-const Template: Story<ReactFlowProps> = (args) => <GraphWrapper {...args} />
+export default meta
 
-export const SmartBezierInteraction = Template.bind({})
-SmartBezierInteraction.args = SmartBezier.args
-SmartBezierInteraction.play = async ({ canvasElement }) => {
+type Story = StoryObj<typeof meta>
+
+const Template: StoryFn<ReactFlowProps> = (args) => <GraphWrapper {...args} />
+
+const playInteraction = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
 	await wait(500)
 	const canvas = within(canvasElement)
 	const node4 = canvas.getByText('Node 4')
@@ -33,10 +35,20 @@ SmartBezierInteraction.play = async ({ canvasElement }) => {
 	await SimulateDragAndDrop(node3, { delta: { x: 300, y: -100 } })
 }
 
-export const SmartStraightInteraction = Template.bind({})
-SmartStraightInteraction.args = SmartStraight.args
-SmartStraightInteraction.play = SmartBezierInteraction.play
+export const SmartBezierInteraction: Story = {
+	render: Template,
+	args: SmartBezier.args,
+	play: playInteraction
+}
 
-export const SmartStepInteraction = Template.bind({})
-SmartStepInteraction.args = SmartStep.args
-SmartStepInteraction.play = SmartBezierInteraction.play
+export const SmartStraightInteraction: Story = {
+	render: Template,
+	args: SmartStraight.args,
+	play: playInteraction
+}
+
+export const SmartStepInteraction: Story = {
+	render: Template,
+	args: SmartStep.args,
+	play: playInteraction
+}

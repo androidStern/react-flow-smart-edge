@@ -51,9 +51,9 @@ Each one can be imported individually as a named export.
 
 ```jsx
 import React from 'react'
-import { ReactFlow } from 'reactflow'
+import { ReactFlow } from '@xyflow/react'
 import { SmartBezierEdge } from '@tisoap/react-flow-smart-edge'
-import 'reactflow/dist/style.css'
+import '@xyflow/react/dist/style.css'
 
 const nodes = [
 	{

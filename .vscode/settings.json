@@ -2,7 +2,7 @@
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
+		"source.fixAll.eslint": "explicit"
 	},
 	"[html]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -19,7 +19,7 @@
 		"generatepath",
 		"github",
 		"predeploy",
-		"reactflow",
+		"@xyflow/react",
 		"shopify",
 		"sonarjs",
 		"tisoap",
